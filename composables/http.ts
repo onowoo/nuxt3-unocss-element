@@ -40,7 +40,7 @@ const noLoginUrl = [
   '/addons/cms/api.page/detail',
 ]
 
-const BASE_URL = 'http://api.yuanmatuan.com'
+const BASE_URL = 'http://api.lianun.com:81'
 
 export interface IResultData<T> {
   code: number
@@ -58,7 +58,7 @@ class HttpRequest {
     return new Promise((resolve, reject) => {
       const newOptions: UseFetchOptions<T> = {
         baseURL: BASE_URL,
-        // url,
+        url,
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ class HttpRequest {
 
   // 请求拦截，配置Token等参数
   requestInterceptor(config: any) {
-    // console.log(config.url);
+    // console.log('config',config);
     // 在需要登录的接口，请求前判断token 是否存在,不存在则到登录
     const url = config.url.split('?').shift()
     if (!noLoginUrl.includes(url) && !localStorage.getItem('token')) {
