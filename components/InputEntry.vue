@@ -4,7 +4,7 @@ const name = ref('')
 const router = useRouter()
 function go() {
   if (name.value)
-    router.push(`/hi/${encodeURIComponent(name.value)}.html`)
+    router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
 </script>
 
@@ -13,14 +13,12 @@ function go() {
     <input
       id="input"
       v-model="name"
-      placeholder="Search"
+      placeholder="What's your name?"
       type="text" autocomplete="off"
-      p="x-4 y-2" m="t-5" w="100px"
-      text="left" bg="transparent"
+      p="x-4 y-2" m="t-5" w="250px"
+      text="center" bg="transparent"
       border="~ rounded gray-200 dark:gray-700"
       outline="none active:none"
-      duration="300"
-      focus="w-500px"
       @keydown.enter="go"
     >
     <div>

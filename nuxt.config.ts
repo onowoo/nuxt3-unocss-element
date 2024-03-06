@@ -1,3 +1,4 @@
+import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
@@ -6,6 +7,7 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
+    '@vite-pwa/nuxt',
     'nuxt-module-eslint-config',
     '@element-plus/nuxt',
   ],
@@ -20,10 +22,19 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
+    'element-plus/theme-chalk/dark/css-vars.css',
   ],
 
   colorMode: {
     classSuffix: '',
+  },
+
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
   },
 
   app: {
@@ -36,12 +47,15 @@ export default defineNuxtConfig({
       ],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
         { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
         { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
       ],
     },
   },
+
+  pwa,
 
   devtools: {
     enabled: true,
