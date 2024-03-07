@@ -1,8 +1,8 @@
 <template>
   <el-badge :value="flagValue?.text" class="item" :type="flagValue?.type">
-    <el-text>{{
+    <div px-1>{{
       name
-    }}</el-text>
+    }}</div>
   </el-badge>
 </template>
 <script setup>
@@ -30,7 +30,7 @@ const flagType = [
     {
         flag:'recommend',
         text:'推荐',
-        type:'warning'
+        type:'primary'
     },
     {
         flag:'top',
@@ -40,7 +40,7 @@ const flagType = [
     {
         flag:'focus',
         text:'焦点',
-        type:'info'
+        type:'warning'
     },
 ]
 const flagValue = computed(()=> flagType.find(item => item.flag === props.flag))
