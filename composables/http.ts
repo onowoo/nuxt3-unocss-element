@@ -18,6 +18,7 @@ const noLoginUrl = [
   '/addons/cms/api.login/wxLogin',
   '/addons/cms/api.login/appLogin',
   '/addons/cms/api.login/getWechatMobile',
+  '/addons/cms/api.archives/get_channel',
   '/addons/cms/api.my/aboutus',
   '/addons/cms/api.my/agreement',
   '/addons/third/api/getAuthUrl',
@@ -40,7 +41,7 @@ const noLoginUrl = [
   '/addons/cms/api.page/detail',
 ]
 
-const BASE_URL = 'http://api.lianun.com:81'
+const BASE_URL = 'http://api.xunun.cn'
 
 export interface IResultData<T> {
   code: number

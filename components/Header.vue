@@ -7,7 +7,7 @@
       </div>
       <div flex="~ items-center gap-3">
         <header-Dark />
-        <div v-if="isUser" class="login-btn" @click="$router.push('/user/login.html')">登陆 | 注册</div>
+        <div v-if="!isUser" class="login-btn" @click="$router.push('/user/login.html')">登陆 | 注册</div>
         <div v-else>123</div>
       </div>
     </div>
