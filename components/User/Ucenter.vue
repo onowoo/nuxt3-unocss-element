@@ -46,8 +46,8 @@
         <div text="center xs">免费试学课程 · 收藏优质内容 · 提升成长等级</div>
         <div
           v-if="!isUser"
-          class="login-btn text-center"
-          @click="$router.push('/user/login.html')"
+          class="login-btn text-center cursor-pointer"
+          @click="loginVisible = !loginVisible"
         >
           登陆 | 注册
         </div>
@@ -73,6 +73,35 @@
       </div>
     </div>
   </div>
+  <client-only>
+    <el-dialog v-model="loginVisible" width="500" :show-close="false" style="--el-dialog-margin-top:35vh">
+      <el-form :model="form">
+        <el-form-item label="Promotion name" label-width="400px">
+          <el-input v-model="form.name" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="Zones" label-width="400px">
+          <el-select v-model="form.region" placeholder="Please select a zone">
+            <el-option label="Zone No.1" value="shanghai" />
+            <el-option label="Zone No.2" value="beijing" />
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="loginVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="loginVisible = false">
+            Confirm
+          </el-button>
+        </div>
+      </template>
+      <template #header="{ close, titleId }">
+        <div class="my-header" flex="~ justify-between items-center" border-b pb-3 dark="border-dark-100">
+        <div :id="titleId" class="font-300">登录畅享本站资源</div>
+        <div @click="close" class="cursor-pointer i-carbon-close"></div>
+      </div>
+      </template>
+    </el-dialog>
+  </client-only>
 </template>
   <script setup>
 const props = defineProps({
@@ -82,6 +111,17 @@ const props = defineProps({
   },
 });
 const isUser = ref(false);
+const loginVisible = ref(false);
+const form = reactive({
+  name: "",
+  region: "",
+  date1: "",
+  date2: "",
+  delivery: false,
+  type: [],
+  resource: "",
+  desc: "",
+});
 onMounted(() => {
   if (localStorage.getItem("token")) {
     isUser.value = true;
