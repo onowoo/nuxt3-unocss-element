@@ -1,11 +1,15 @@
 <script setup>
 const menu = ref([])
+const pending = ref(true)
 const getPageList = async() => {
     try {
         await nextTick()
         const res = await getChannel()
-        console.log(res.data);
+        console.log(res);
         menu.value = res.data.value.data.channel
+        setTimeout(()=>{
+          pending.value = res.pending.value
+        },600)
     } catch (error) {
         console.log(error);
     }
@@ -22,8 +26,9 @@ const listMenu = computed(() => menu.value.filter(item => item.type === 'list'))
   <div hidden lg:flex>
     <div text="#515767 sm" w-full flex="~ items-center justify-center gap-6" dark="text-#ffffffb3">
       <div v-for="(item,index) in channelMenu" :key="index">
-        <div v-if="!item.haschild === 1" class="menu-item" >{{ item.name }}</div>
-        <header-mega :menu="item" :mega="listMenu" v-else/>
+          <div bg-dark-300 rounded-lg w-20 h-5 text-white v-show="pending"></div>
+          <div v-show="item.haschild === 0 && !pending" class="menu-item" >{{ item.name }}</div>
+          <header-mega :menu="item" :mega="listMenu" v-show="item.haschild === 1 && !pending"/>
       </div>
     </div>
   </div>
