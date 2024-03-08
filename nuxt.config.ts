@@ -3,13 +3,13 @@ import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
   modules: [
+    '@element-plus/nuxt',
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     'nuxt-module-eslint-config',
-    '@element-plus/nuxt',
   ],
 
   experimental: {
@@ -34,6 +34,11 @@ export default defineNuxtConfig({
       options: {
         target: 'esnext',
       },
+    },
+    prerender: {
+      crawlLinks: false,
+      routes: ['/'],
+      ignore: ['/hi'],
     },
   },
 
