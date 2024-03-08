@@ -41,8 +41,8 @@
         py-4
         dark="border-dark-100"
       >
-        <div flex="~ col">
-          <span text-left font-medium leading-none>畅想下载</span>
+        <div flex="~ col gap-2">
+          <span text-left font-medium leading-none>开通Vip,尊享全站免费下载服务</span>
           <span mt-1 text-left text-xs
             >阿苏丹发的啥饭大房东说放假啊可乐苏丹交罚款律师的卷发可乐酒店开房间啊老董开始姐夫</span
           >

@@ -20,7 +20,7 @@ const listMenu = computed(() => menu.value.filter(item => item.type === 'list'))
 <template>
   <header-btn lg:hidden />
   <div hidden lg:flex>
-    <div text="#b8b8b8 sm" w-full flex="~ items-center justify-center gap-6">
+    <div text="#515767 sm" w-full flex="~ items-center justify-center gap-6" dark="text-#ffffffb3">
       <div v-for="(item,index) in channelMenu" :key="index">
         <div v-if="!item.haschild === 1" class="menu-item" >{{ item.name }}</div>
         <header-mega :menu="item" :mega="listMenu" v-else/>
@@ -34,6 +34,6 @@ const listMenu = computed(() => menu.value.filter(item => item.type === 'list'))
   display: block;
 }
 .menu-item {
-  @apply h-16 flex items-center hover:(text-[#409EFF] border-b-3 border-[#409eff] font-bold) cursor-pointer tracking-widest;
+  @apply h-16 flex items-center hover:(text-[#409EFF] border-[#409eff]) cursor-pointer tracking-widest;
 }
 </style>
