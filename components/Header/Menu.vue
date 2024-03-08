@@ -26,7 +26,7 @@ const listMenu = computed(() => menu.value.filter(item => item.type === 'list'))
   <div hidden lg:flex>
     <div text="#515767 sm" w-full flex="~ items-center justify-center gap-6" dark="text-#ffffffb3">
       <div v-for="(item,index) in channelMenu" :key="index">
-          <div bg-dark-300 rounded-lg w-20 h-5 text-white v-show="pending"></div>
+          <div dark="bg-dark-300" bg-gray-200 rounded-lg w-20 h-5 text-white v-show="pending"></div>
           <div v-show="item.haschild === 0 && !pending" class="menu-item" >{{ item.name }}</div>
           <header-mega :menu="item" :mega="listMenu" v-show="item.haschild === 1 && !pending"/>
       </div>
