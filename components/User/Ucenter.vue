@@ -4,7 +4,7 @@
       <div
         v-if="!isUser"
         class="login-btn cursor-pointer"
-        @click="$router.push('/user/login.html')"
+        @click="loginVisible = !loginVisible"
       >
         登陆 | 注册
       </div>
