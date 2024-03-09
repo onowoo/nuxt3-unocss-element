@@ -20,7 +20,6 @@ html {
 html.dark {
   background: #000;
   color: #d0d0d0;
-  font-family:  sans;
 }
 body,
 #__nuxt {

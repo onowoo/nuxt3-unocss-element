@@ -1,6 +1,6 @@
 <template>
   <div class="group z-50" relative flex="col items-center" focus="outline-none">
-    <div class="menu-item gap-1">
+    <div class="menu-item gap-1" font-300>
       {{ menu.name }} <span class="i-carbon-chevron-down" opacity-80 />
     </div>
     <div
