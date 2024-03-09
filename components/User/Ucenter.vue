@@ -74,8 +74,8 @@
     </div>
   </div>
   <client-only>
-    <el-dialog v-model="loginVisible" width="500" :show-close="false" style="--el-dialog-margin-top:35vh">
-      <el-form :model="form">
+    <el-dialog v-model="loginVisible" width="500" :show-close="false" style="--el-dialog-margin-top:35vh;--el-dialog-padding-primary:0">
+      <el-form :model="form" p-3>
         <el-form-item label="Promotion name" label-width="400px">
           <el-input v-model="form.name" autocomplete="off" />
         </el-form-item>
@@ -87,20 +87,19 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <div class="dialog-footer">
-          <el-button @click="loginVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="loginVisible = false">
-            Confirm
-          </el-button>
+        <div flex="~ justify-center items-center" p-3 text="xs">
+          注册登录即表示同意 <span mx-1 text="#409EFF" cursor-pointer> 用户协议</span> 和 <span ml-1 text="#409EFF" cursor-pointer> 隐私政策</span>
         </div>
       </template>
       <template #header="{ close, titleId }">
-        <div class="my-header" flex="~ justify-between items-center" border-b pb-3 dark="border-dark-100">
-        <div :id="titleId" class="font-300">登录畅享本站资源</div>
+        <div class="my-header" flex="~ justify-between items-center" border-b p-3 dark="border-dark-100">
+        <div :id="titleId" class="font-200">登录畅享本站资源</div>
         <div @click="close" class="cursor-pointer i-carbon-close"></div>
       </div>
       </template>
     </el-dialog>
+
+    
   </client-only>
 </template>
   <script setup>
