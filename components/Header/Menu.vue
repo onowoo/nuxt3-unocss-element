@@ -5,7 +5,7 @@ const getPageList = async() => {
     try {
         await nextTick()
         const res = await getChannel()
-        console.log(res);
+        // console.log(res);
         menu.value = res.data.value.data.channel
         setTimeout(()=>{
           pending.value = res.pending.value

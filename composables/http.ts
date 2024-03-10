@@ -111,15 +111,15 @@ class HttpRequest {
     const result = res.data.value
 
     switch (result.code) {
-      case 1:
-        return result
-        break
-      case 0:
-        ElMessage({
-          message: result.msg,
-        })
-        return result
-        break
+      // case 1:
+      //   return result
+      //   break
+      // case 0:
+      //   ElMessage({
+      //     message: result.msg,
+      //   })
+      //   return result
+      //   break
       case 401:
         // 需要登录的接口，当token 过期时，到登录页面
         ElMessage({
@@ -134,14 +134,14 @@ class HttpRequest {
         })
         return result
         break
-      default:
-        if (res.statusCode === 200) {
-          return res.data
-        }
-        else {
-          // 显示错误信息的逻辑
-          return false
-        }
+      // default:
+      //   if (res.statusCode === 200) {
+      //     return res.data
+      //   }
+      //   else {
+      //     // 显示错误信息的逻辑
+      //     return false
+      //   }
     }
   }
   // 封装常用方法
