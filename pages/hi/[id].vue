@@ -13,6 +13,7 @@ definePageMeta({
 </script>
 
 <template>
+  <Header />
   <div>
     <div i-twemoji:waving-hand inline-block animate-shake-x animate-duration-5000 text-4xl />
     <h3 text-2xl font-500>

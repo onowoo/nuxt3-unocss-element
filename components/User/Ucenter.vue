@@ -218,6 +218,7 @@ const props = defineProps({
     default: {},
   },
 });
+const router = useRouter()
 //状态
 const isUser = ref(false);
 const loginVisible = ref(false);
@@ -291,6 +292,15 @@ const submit = async () => {
         password: form.password,
       };
       const res = await goLogin(data);
+      if (res.data.value.data.token) {
+        localStorage.setItem('token',res.data.value.data.token)
+        localStorage.setItem('user',res.data.value.data.user_id)
+        if (router.back) {
+          router.back
+        } else {
+          router.push('/')
+        }
+      }
       const type = res.data.value.code === 0 ? 'error' : 'success'
       ElMessage({
         message: res.data.value.msg,
@@ -304,6 +314,15 @@ const submit = async () => {
         captcha: form.code,
       };
       const res = await goRegister(data);
+      if (res.data.value.data.token) {
+        localStorage.setItem('token',res.data.value.data.token)
+        localStorage.setItem('user',res.data.value.data.user_id)
+        if (router.back) {
+          router.back
+        } else {
+          router.push('/')
+        }
+      }
       const type = res.data.value.code === 0 ? 'error' : 'success'
       ElMessage({
         message: res.data.value.msg,
@@ -316,6 +335,9 @@ const submit = async () => {
         captcha: form.code,
       };
       const res = await goResetpwd(data);
+       if (res.data.value.code === 1) {
+        router.push('/')
+      }
       const type = res.data.value.code === 0 ? 'error' : 'success'
       ElMessage({
         message: res.data.value.msg,
