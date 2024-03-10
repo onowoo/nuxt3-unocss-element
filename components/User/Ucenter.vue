@@ -74,21 +74,38 @@
     </div>
   </div>
   <client-only>
-    <el-dialog v-model="loginVisible" width="500" :show-close="false" style="--el-dialog-margin-top:35vh;--el-dialog-padding-primary:0">
+    <el-dialog v-model="loginVisible" width="500" :show-close="false" style="--el-dialog-margin-top:35vh;--el-dialog-padding-primary:0;--el-dialog-border-radius:8px">
       <div flex="~ flex">
         <div basis="2/3" border="r gray-300 dark:dark-50" pt-3>
           <el-form flex="~ col items-center justify-center">
-            <el-form-item>
+            <el-form-item v-if="state !== 'forget'">
               <el-input v-model="form.name" style="width: 240px" placeholder="请输入用户名" />
             </el-form-item>
             <el-form-item>
               <el-input v-model="form.password" style="width: 240px" placeholder="请输入密码">
-                <template #append><div @click="console.log('forget')" cursor-pointer>忘记密码</div></template>
               </el-input>
             </el-form-item>
-            <el-form-item flex="gap-4">
-              <el-button type="primary" plain style="padding:8px 42px;">注册</el-button>
-              <el-button type="primary" style="padding:8px 42px;">登录</el-button>
+            <el-form-item v-if="state !== 'login'">
+              <el-input v-model="form.rePassword" style="width: 240px" placeholder="确认输入的密码">
+              </el-input>
+            </el-form-item>
+            <el-form-item v-if="state !== 'login'">
+              <el-input v-model="form.email" style="width: 240px" placeholder="请输入邮箱">
+              </el-input>
+            </el-form-item>
+            <el-form-item v-if="state !== 'login'">
+              <el-input v-model="form.code" style="width: 240px" placeholder="请输入验证码">
+                <template #append><div @click="console.log('forget')" cursor-pointer>获取验证码</div></template>
+              </el-input>
+            </el-form-item>
+            <el-form-item>
+              <div flex="~ col justify-center items-center gap-4">
+               <el-button type="primary" plain style="width: 240px" @click="console.log('zhuce')">{{ btnText[state][0] }}</el-button>
+               <div style="width: 240px" flex="~ justify-between">
+                <div text="xs hover:#409eff" cursor-pointer @click="state = btnText[state][1].includes('登录') ? 'login' : 'sign'">{{ btnText[state][1] }}</div>
+                <div text="xs hover:#409eff" cursor-pointer @click="state = btnText[state][2].includes('注册') ? 'sign' : 'forget'">{{ btnText[state][2] }}</div>
+               </div>
+              </div>
             </el-form-item>
             <el-form-item>
               
@@ -106,7 +123,7 @@
         </div>
       </template>
       <template #header="{ close, titleId }">
-        <div class="my-header" flex="~ justify-between items-center" border-b p-3 mb-6 dark="border-dark-100">
+        <div class="my-header" flex="~ justify-between items-center" border-b p-3 mb-3 dark="border-dark-100">
         <div :id="titleId" class="font-200">登录畅享本站资源</div>
         <div @click="close" class="cursor-pointer i-carbon-close"></div>
       </div>
@@ -116,7 +133,7 @@
     
   </client-only>
 </template>
-  <script setup>
+<script setup>
 const props = defineProps({
   isShow: {
     type: Object,
@@ -125,9 +142,19 @@ const props = defineProps({
 });
 const isUser = ref(false);
 const loginVisible = ref(false);
+const state = ref('login'); // 初始状态为 login
+const btnText = {
+  login: ['立即登录', '立即注册', '忘记密码'],
+  sign: ['立即注册', '立即登录', '忘记密码'],
+  forget: ['立即重制', '立即登录', '立即注册'],
+};
+
 const form = reactive({
   name: "",
-  password: ""
+  password: "",
+  rePassword:"",
+  email:"",
+  code:""
 });
 onMounted(() => {
   if (localStorage.getItem("token")) {
