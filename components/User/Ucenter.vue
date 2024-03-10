@@ -235,7 +235,7 @@ const btnText = {
   sign: ["立即注册", "立即登录", "忘记密码"],
   forget: ["立即重制", "立即登录", "立即注册"],
 };
-//登陆、注册、重制密码的表单数据
+//登陆、注册、重制密码的表单数据和验证规则
 const form = reactive({
   name: "",
   password: "",
@@ -292,20 +292,21 @@ const submit = async () => {
         password: form.password,
       };
       const res = await goLogin(data);
-      if (res.data.value.data.token) {
+      if (res.data.value.code === 1) {
+        isUser.value = true
         localStorage.setItem('token',res.data.value.data.token)
         localStorage.setItem('user',res.data.value.data.user_id)
-        if (router.back) {
-          router.back
+        loginVisible.value = false
+        ElMessage({
+          message: res.data.value.msg,
+          type: 'success',
+        })
         } else {
-          router.push('/')
+          ElMessage({
+          message: res.data.value.msg,
+          type: 'error',
+        })
         }
-      }
-      const type = res.data.value.code === 0 ? 'error' : 'success'
-      ElMessage({
-        message: res.data.value.msg,
-        type: type,
-      });
     } else if (state.value === "sign") {
       const data = {
         username: form.name,
@@ -314,20 +315,21 @@ const submit = async () => {
         captcha: form.code,
       };
       const res = await goRegister(data);
-      if (res.data.value.data.token) {
+      if (res.data.value.code === 1) {
+        isUser.value = true
         localStorage.setItem('token',res.data.value.data.token)
         localStorage.setItem('user',res.data.value.data.user_id)
-        if (router.back) {
-          router.back
+        loginVisible.value = false
+        ElMessage({
+          message: res.data.value.msg,
+          type: 'success',
+        })
         } else {
-          router.push('/')
-        }
+          ElMessage({
+          message: res.data.value.msg,
+          type: 'error',
+        })
       }
-      const type = res.data.value.code === 0 ? 'error' : 'success'
-      ElMessage({
-        message: res.data.value.msg,
-        type: type,
-      });
     } else {
       const data = {
         email: form.email,
@@ -335,14 +337,18 @@ const submit = async () => {
         captcha: form.code,
       };
       const res = await goResetpwd(data);
-       if (res.data.value.code === 1) {
-        router.push('/')
+      if (res.data.value.code === 1) {
+        loginVisible.value = false
+        ElMessage({
+          message: res.data.value.msg,
+          type: 'success',
+        })
+        } else {
+          ElMessage({
+          message: res.data.value.msg,
+          type: 'error',
+        })
       }
-      const type = res.data.value.code === 0 ? 'error' : 'success'
-      ElMessage({
-        message: res.data.value.msg,
-        type: type,
-      });
     }
   } catch (error) {
     console.log(error);
