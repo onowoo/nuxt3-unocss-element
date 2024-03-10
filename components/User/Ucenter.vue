@@ -75,24 +75,38 @@
   </div>
   <client-only>
     <el-dialog v-model="loginVisible" width="500" :show-close="false" style="--el-dialog-margin-top:35vh;--el-dialog-padding-primary:0">
-      <el-form :model="form" p-3>
-        <el-form-item label="Promotion name" label-width="400px">
-          <el-input v-model="form.name" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="Zones" label-width="400px">
-          <el-select v-model="form.region" placeholder="Please select a zone">
-            <el-option label="Zone No.1" value="shanghai" />
-            <el-option label="Zone No.2" value="beijing" />
-          </el-select>
-        </el-form-item>
-      </el-form>
+      <div flex="~ flex">
+        <div basis="2/3" border="r gray-300 dark:dark-50" pt-3>
+          <el-form flex="~ col items-center justify-center">
+            <el-form-item>
+              <el-input v-model="form.name" style="width: 240px" placeholder="请输入用户名" />
+            </el-form-item>
+            <el-form-item>
+              <el-input v-model="form.password" style="width: 240px" placeholder="请输入密码">
+                <template #append><div @click="console.log('forget')" cursor-pointer>忘记密码</div></template>
+              </el-input>
+            </el-form-item>
+            <el-form-item flex="gap-4">
+              <el-button type="primary" plain style="padding:8px 42px;">注册</el-button>
+              <el-button type="primary" style="padding:8px 42px;">登录</el-button>
+            </el-form-item>
+            <el-form-item>
+              
+            </el-form-item>
+          </el-form>
+        </div>
+        <div basis="1/3" py-3 px-8 flex="~ col justify-center items-center">
+          <div>扫码登录</div>
+          <div i-carbon-qr-code w-30 h-30></div>
+        </div>
+      </div>
       <template #footer>
         <div flex="~ justify-center items-center" p-3 text="xs">
           注册登录即表示同意 <span mx-1 text="#409EFF" cursor-pointer> 用户协议</span> 和 <span ml-1 text="#409EFF" cursor-pointer> 隐私政策</span>
         </div>
       </template>
       <template #header="{ close, titleId }">
-        <div class="my-header" flex="~ justify-between items-center" border-b p-3 dark="border-dark-100">
+        <div class="my-header" flex="~ justify-between items-center" border-b p-3 mb-6 dark="border-dark-100">
         <div :id="titleId" class="font-200">登录畅享本站资源</div>
         <div @click="close" class="cursor-pointer i-carbon-close"></div>
       </div>
@@ -113,13 +127,7 @@ const isUser = ref(false);
 const loginVisible = ref(false);
 const form = reactive({
   name: "",
-  region: "",
-  date1: "",
-  date2: "",
-  delivery: false,
-  type: [],
-  resource: "",
-  desc: "",
+  password: ""
 });
 onMounted(() => {
   if (localStorage.getItem("token")) {
