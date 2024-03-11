@@ -62,7 +62,7 @@ export default defineNuxtConfig({
   pwa,
 
   devtools: {
-    enabled: true,
+    enabled: false,
   },
 
   features: {
@@ -71,6 +71,6 @@ export default defineNuxtConfig({
   },
 
   eslintConfig: {
-    setup: false,
+    setup: true,
   },
 })

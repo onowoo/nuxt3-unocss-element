@@ -1,17 +1,20 @@
 <template>
   <div class="group z-50" relative flex="col items-center" focus="outline-none">
+    <client-only>
     <div class="menu-item gap-1">
       <div
-        v-if="!isUser"
+        v-if="!user.isLogin"
         class="login-btn cursor-pointer"
         @click="loginVisible = !loginVisible"
       >
         登陆 | 注册
       </div>
-      <div v-else>123</div>
+      <div v-else>
+        <img :src="user.userInfo.avatar" class="rounded-full w-8 h-8" alt="">
+      </div>
     </div>
     <div
-      v-if="!isUser"
+      v-if="!user.isLogin"
       class="group-hover:visible"
       absolute
       top-0
@@ -73,6 +76,7 @@
         <div>{{ user.userInfo.level }}</div>
       </div>
     </div>
+    </client-only>
   </div>
   <client-only>
     <el-dialog
@@ -220,7 +224,9 @@ const props = defineProps({
   },
 });
 const user = useUserStore()
-// console.log(userInfo);
+watchEffect(()=>{
+  console.log(user.userInfo);
+})
 const router = useRouter()
 //状态
 const isUser = ref(false);
@@ -395,24 +401,18 @@ const getCode = async () => {
     console.error(error);
   }
 };
-//用户信息请求
-  const getUser = async() => {
-    try {
-      await nextTick();
-      const res = await getUserIndex()
-      user.userInfo = res.data.value.data.userInfo
-    } catch (error) {
-      // 处理错误情况
-      console.error('请求用户信息失败', error);
-    }
-  }
-onMounted(() => {
+
+onMounted(()=>{
   if (localStorage.getItem("token")) {
     isUser.value = true;
-    getUser()
   }
-});
-console.log(user.userInfo.username);
+})
+onBeforeMount(async()=>{
+  if (localStorage.getItem("token")) {
+    user.isLogin = true;
+    await user.getUser()
+  }
+})
 </script>
 
 <style scoped>

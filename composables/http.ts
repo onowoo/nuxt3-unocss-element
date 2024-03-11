@@ -94,7 +94,7 @@ class HttpRequest {
     // 在需要登录的接口，请求前判断token 是否存在,不存在则到登录
     const url = config.url.split('?').shift()
     if (!noLoginUrl.includes(url) && !localStorage.getItem('token')) {
-      navigateTo('/login')
+      // navigateTo('/login')
       ElMessage({
         message: '请先登陆后再操作',
         duration: 3000,
