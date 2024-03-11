@@ -39,8 +39,8 @@ function myArchives(params: any) {
 function deleteArchives(params: any) {
   return httpRequest.post({ url: '/addons/cms/api.archives/delete', data: params })
 }
-function getUserIndex(params: any) {
-  return httpRequest.get({ url: '/addons/cms/api.user/index', params })
+function getUserIndex() {
+  return httpRequest.get({ url: '/addons/cms/api.user/index' })
 }
 function getUserProfile(params: any) {
   return httpRequest.post({ url: '/addons/cms/api.user/profile', data: params })

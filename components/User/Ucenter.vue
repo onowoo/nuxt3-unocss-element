@@ -58,7 +58,7 @@
       class="group-hover:visible"
       absolute
       top-0
-      right-8
+      right-0
       mt-16
       rounded-8px
       hidden
@@ -69,7 +69,8 @@
       dark="bg-#282828"
     >
       <div>
-        <div>登陆后的</div>
+        <div>{{ user.userInfo.username }}</div>
+        <div>{{ user.userInfo.level }}</div>
       </div>
     </div>
   </div>
@@ -218,6 +219,8 @@ const props = defineProps({
     default: {},
   },
 });
+const user = useUserStore()
+// console.log(userInfo);
 const router = useRouter()
 //状态
 const isUser = ref(false);
@@ -392,11 +395,24 @@ const getCode = async () => {
     console.error(error);
   }
 };
+//用户信息请求
+  const getUser = async() => {
+    try {
+      await nextTick();
+      const res = await getUserIndex()
+      user.userInfo = res.data.value.data.userInfo
+    } catch (error) {
+      // 处理错误情况
+      console.error('请求用户信息失败', error);
+    }
+  }
 onMounted(() => {
   if (localStorage.getItem("token")) {
     isUser.value = true;
+    getUser()
   }
 });
+console.log(user.userInfo.username);
 </script>
 
 <style scoped>
