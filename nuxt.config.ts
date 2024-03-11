@@ -1,4 +1,3 @@
-import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
@@ -8,7 +7,6 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
-    '@vite-pwa/nuxt',
     'nuxt-module-eslint-config',
   ],
 
@@ -22,7 +20,7 @@ export default defineNuxtConfig({
 
   css: [
     '@unocss/reset/tailwind.css',
-    'element-plus/theme-chalk/dark/css-vars.css',
+    // 'element-plus/theme-chalk/dark/css-vars.css',
   ],
 
   colorMode: {
@@ -59,10 +57,8 @@ export default defineNuxtConfig({
     },
   },
 
-  pwa,
-
   devtools: {
-    enabled: false,
+    enabled: true,
   },
 
   features: {

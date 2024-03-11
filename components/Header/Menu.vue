@@ -1,21 +1,21 @@
 <script setup>
 const menu = ref([])
 const pending = ref(true)
-const getPageList = async() => {
+const getMenuList = async() => {
     try {
         await nextTick()
         const res = await getChannel()
         // console.log(res);
         menu.value = res.data.value.data.channel
-        setTimeout(()=>{
+        
           pending.value = res.pending.value
-        },600)
+
     } catch (error) {
         console.log(error);
     }
 }
 onMounted(()=>[
-  getPageList()
+getMenuList()
 ])
 const channelMenu = computed(() => menu.value.filter(item => item.type === 'channel'))
 const listMenu = computed(() => menu.value.filter(item => item.type === 'list'))

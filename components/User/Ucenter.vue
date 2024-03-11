@@ -1,9 +1,8 @@
 <template>
   <div class="group z-50" relative flex="col items-center" focus="outline-none">
-    <client-only>
-    <div class="menu-item gap-1">
+    <div class="menu-item gap-1" v-show="!userPending">
       <div
-        v-if="!user.isLogin"
+        v-if="!isLogin"
         class="login-btn cursor-pointer"
         @click="loginVisible = !loginVisible"
       >
@@ -14,7 +13,7 @@
       </div>
     </div>
     <div
-      v-if="!user.isLogin"
+      v-if="!isLogin"
       class="group-hover:visible"
       absolute
       top-0
@@ -48,7 +47,6 @@
         </div>
         <div text="center xs">免费试学课程 · 收藏优质内容 · 提升成长等级</div>
         <div
-          v-if="!isUser"
           class="login-btn text-center cursor-pointer"
           @click="loginVisible = !loginVisible"
         >
@@ -72,11 +70,9 @@
       dark="bg-#282828"
     >
       <div>
-        <div>{{ user.userInfo.username }}</div>
-        <div>{{ user.userInfo.level }}</div>
+        <div>{{ userInfo }}</div>
       </div>
     </div>
-    </client-only>
   </div>
   <client-only>
     <el-dialog
@@ -224,12 +220,18 @@ const props = defineProps({
   },
 });
 const user = useUserStore()
-watchEffect(()=>{
-  console.log(user.userInfo);
-})
+const {userInfo,userPending} = storeToRefs(user)
 const router = useRouter()
 //状态
-const isUser = ref(false);
+const isLogin = computed(()=>{
+  return !!localStorage.getItem('user') && !!localStorage.getItem('token')
+})
+watchEffect(()=>{
+  console.log(userInfo.value);
+  console.log('userPending',userPending.value);
+  console.log('isLogin',isLogin.value);
+})
+
 const loginVisible = ref(false);
 const state = ref("login"); // 初始状态为 login
 const checkCodeBtn = reactive({
@@ -302,7 +304,7 @@ const submit = async () => {
       };
       const res = await goLogin(data);
       if (res.data.value.code === 1) {
-        isUser.value = true
+        isLogin = true
         localStorage.setItem('token',res.data.value.data.token)
         localStorage.setItem('user',res.data.value.data.user_id)
         loginVisible.value = false
@@ -325,7 +327,7 @@ const submit = async () => {
       };
       const res = await goRegister(data);
       if (res.data.value.code === 1) {
-        isUser.value = true
+        isLogin = true
         localStorage.setItem('token',res.data.value.data.token)
         localStorage.setItem('user',res.data.value.data.user_id)
         loginVisible.value = false
@@ -403,14 +405,8 @@ const getCode = async () => {
 };
 
 onMounted(()=>{
-  if (localStorage.getItem("token")) {
-    isUser.value = true;
-  }
-})
-onBeforeMount(async()=>{
-  if (localStorage.getItem("token")) {
-    user.isLogin = true;
-    await user.getUser()
+  if (localStorage.getItem('token')) {
+    user.getUser()
   }
 })
 </script>

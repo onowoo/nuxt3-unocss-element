@@ -3,7 +3,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 export const useUserStore = defineStore('user', () => {
 
   //存储用户信息
-  const userInfo = ref({
+  let userInfo = ref({
     "id": 0,
     "username": "",
     "nickname": "",
@@ -22,24 +22,25 @@ export const useUserStore = defineStore('user', () => {
     "expires_in": 0,
     "vipInfo": [],
   })
-  const isLogin = ref(false)
-
+  const userPending = ref(false)
   //请求用户信息
-  const getUser = async() => {
-    try {
-      await nextTick();
-      const res:any = await getUserIndex()
-      userInfo.value = res.data.value.data.userInfo
-      return userInfo.value
-    } catch (error) {
-      // 处理错误情况
-      console.error('请求用户信息失败', error);
-    }
+const getUser = async() => {
+  try {
+    await nextTick();
+    const res:any = await getUserIndex()
+    // console.log(res.data.value)
+    userPending.value = res.pending.value
+    userInfo.value = toRaw(res.data.value).data.userInfo
+
+  } catch (error) {
+    // 处理错误情况
+    console.error('请求用户信息失败', error);
   }
+}
   return {
     getUser,
     userInfo,
-    isLogin
+    userPending
   }
 })
 
