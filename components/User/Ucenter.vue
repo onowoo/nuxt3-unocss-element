@@ -1,80 +1,93 @@
 <template>
-  <div class="group z-50" relative flex="col items-center" focus="outline-none">
-    <div class="menu-item gap-1" v-show="!userPending">
-      <div
-        v-if="!isLogin"
-        class="login-btn cursor-pointer"
-        @click="loginVisible = !loginVisible"
-      >
-        登陆 | 注册
-      </div>
-      <div v-else>
-        <img :src="user.userInfo.avatar" class="rounded-full w-8 h-8" alt="">
-      </div>
-    </div>
+  <client-only>
     <div
-      v-if="!isLogin"
-      class="group-hover:visible"
-      absolute
-      top-0
-      right-0
-      mt-16
-      rounded-8px
-      hidden
-      w-288px
-      p-4
-      bg-white
-      shadow-md
-      dark="bg-#282828"
+      class="group z-50"
+      relative
+      flex="col items-center"
+      focus="outline-none"
     >
-      <div flex="~ col gap-4 justify-between items-center">
-        <div class="login-awards" w="100%">
-          <div text-center>首次登录 / 注册免费领取</div>
-          <div flex="~ justify-around" text-xs mt-6>
-            <div flex="~ col justify-center items-center gap-1">
-              <div i-carbon-flag-filled w-4 h-4 />
-              <div>7天会员</div>
-            </div>
-            <div flex="~ col justify-center items-center gap-1">
-              <div i-carbon-flag-filled w-4 h-4 />
-              <div>7天会员</div>
-            </div>
-            <div flex="~ col justify-center items-center gap-1">
-              <div i-carbon-flag-filled w-4 h-4 />
-              <div>7天会员</div>
-            </div>
-          </div>
-        </div>
-        <div text="center xs">免费试学课程 · 收藏优质内容 · 提升成长等级</div>
+      <div class="menu-item gap-1">
         <div
-          class="login-btn text-center cursor-pointer"
+          v-if="!user.isLogin"
+          class="login-btn cursor-pointer"
           @click="loginVisible = !loginVisible"
         >
           登陆 | 注册
         </div>
+        <div v-else>
+          <img
+            :src="user.userInfo.avatar"
+            class="rounded-full w-8 h-8"
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        v-if="!user.isLogin"
+        class="group-hover:visible"
+        absolute
+        top-0
+        right-0
+        mt-16
+        rounded-8px
+        hidden
+        w-288px
+        p-4
+        bg-white
+        shadow-md
+        dark="bg-#282828"
+      >
+        <div flex="~ col gap-4 justify-between items-center">
+          <div class="login-awards" w="100%">
+            <div text-center>首次登录 / 注册免费领取</div>
+            <div flex="~ justify-around" text-xs mt-6>
+              <div flex="~ col justify-center items-center gap-1">
+                <div i-carbon-flag-filled w-4 h-4 />
+                <div>7天会员</div>
+              </div>
+              <div flex="~ col justify-center items-center gap-1">
+                <div i-carbon-flag-filled w-4 h-4 />
+                <div>7天会员</div>
+              </div>
+              <div flex="~ col justify-center items-center gap-1">
+                <div i-carbon-flag-filled w-4 h-4 />
+                <div>7天会员</div>
+              </div>
+            </div>
+          </div>
+          <div text="center xs">免费试学课程 · 收藏优质内容 · 提升成长等级</div>
+          <div
+            class="login-btn text-center cursor-pointer"
+            @click="loginVisible = !loginVisible"
+          >
+            登陆 | 注册
+          </div>
+        </div>
+      </div>
+      <div
+        v-else
+        class="group-hover:visible"
+        absolute
+        top-0
+        right-0
+        mt-15
+        rounded-8px
+        hidden
+        w-288px
+        p="16px 16px 16px 20px"
+        bg-white
+        shadow-md
+        dark="bg-#282828"
+      >
+        <div>
+          <div>
+            <div>我的设置</div>
+            <div @click="logout">退出登录</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div
-      v-else
-      class="group-hover:visible"
-      absolute
-      top-0
-      right-0
-      mt-16
-      rounded-8px
-      hidden
-      w-288px
-      p="16px 16px 16px 20px"
-      bg-white
-      shadow-md
-      dark="bg-#282828"
-    >
-      <div>
-        <div>{{ userInfo }}</div>
-      </div>
-    </div>
-  </div>
-  <client-only>
+
     <el-dialog
       v-model="loginVisible"
       width="500"
@@ -219,19 +232,11 @@ const props = defineProps({
     default: {},
   },
 });
-const user = useUserStore()
-const {userInfo,userPending} = storeToRefs(user)
-const router = useRouter()
-//状态
-const isLogin = computed(()=>{
-  return !!localStorage.getItem('user') && !!localStorage.getItem('token')
-})
-watchEffect(()=>{
-  console.log(userInfo.value);
-  console.log('userPending',userPending.value);
-  console.log('isLogin',isLogin.value);
-})
 
+const user = useAuthStore();
+const router = useRouter();
+
+//状态
 const loginVisible = ref(false);
 const state = ref("login"); // 初始状态为 login
 const checkCodeBtn = reactive({
@@ -246,6 +251,7 @@ const btnText = {
   sign: ["立即注册", "立即登录", "忘记密码"],
   forget: ["立即重制", "立即登录", "立即注册"],
 };
+
 //登陆、注册、重制密码的表单数据和验证规则
 const form = reactive({
   name: "",
@@ -289,9 +295,7 @@ const rules = reactive({
     { required: true, message: "请输入邮箱", trigger: "blur" },
     { type: "email", message: "请输入正确的邮箱地址", trigger: "blur" },
   ],
-  code: [
-    { required: true, message: "请输入验证码", trigger: "change" },
-  ],
+  code: [{ required: true, message: "请输入验证码", trigger: "change" }],
 });
 //登陆、注册、重置密码api请求
 const submit = async () => {
@@ -304,20 +308,20 @@ const submit = async () => {
       };
       const res = await goLogin(data);
       if (res.data.value.code === 1) {
-        isLogin = true
-        localStorage.setItem('token',res.data.value.data.token)
-        localStorage.setItem('user',res.data.value.data.user_id)
-        loginVisible.value = false
+        router.go();
+        localStorage.setItem("token", res.data.value.data.token);
+        localStorage.setItem("user", res.data.value.data.user_id);
+        loginVisible.value = false;
         ElMessage({
           message: res.data.value.msg,
-          type: 'success',
-        })
-        } else {
-          ElMessage({
+          type: "success",
+        });
+      } else {
+        ElMessage({
           message: res.data.value.msg,
-          type: 'error',
-        })
-        }
+          type: "error",
+        });
+      }
     } else if (state.value === "sign") {
       const data = {
         username: form.name,
@@ -327,19 +331,19 @@ const submit = async () => {
       };
       const res = await goRegister(data);
       if (res.data.value.code === 1) {
-        isLogin = true
-        localStorage.setItem('token',res.data.value.data.token)
-        localStorage.setItem('user',res.data.value.data.user_id)
-        loginVisible.value = false
+        localStorage.setItem("token", res.data.value.data.token);
+        localStorage.setItem("user", res.data.value.data.user_id);
+        loginVisible.value = false;
+        router.go();
         ElMessage({
           message: res.data.value.msg,
-          type: 'success',
-        })
-        } else {
-          ElMessage({
+          type: "success",
+        });
+      } else {
+        ElMessage({
           message: res.data.value.msg,
-          type: 'error',
-        })
+          type: "error",
+        });
       }
     } else {
       const data = {
@@ -349,16 +353,16 @@ const submit = async () => {
       };
       const res = await goResetpwd(data);
       if (res.data.value.code === 1) {
-        loginVisible.value = false
+        loginVisible.value = false;
         ElMessage({
           message: res.data.value.msg,
-          type: 'success',
-        })
-        } else {
-          ElMessage({
+          type: "success",
+        });
+      } else {
+        ElMessage({
           message: res.data.value.msg,
-          type: 'error',
-        })
+          type: "error",
+        });
       }
     }
   } catch (error) {
@@ -368,7 +372,7 @@ const submit = async () => {
 //获取验证码api请求
 const getCode = async () => {
   try {
-    await nextTick()
+    await nextTick();
     //倒计时期间按钮不能单击
     checkCodeBtn.disabled = true;
     //清除定时器
@@ -393,7 +397,7 @@ const getCode = async () => {
       };
       const res = await getEmsSend(data);
       console.log(res.data.value);
-      const type = res.data.value.code === 0 ? 'error' : 'success'
+      const type = res.data.value.code === 0 ? "error" : "success";
       ElMessage({
         message: res.data.value.msg,
         type: type,
@@ -403,12 +407,20 @@ const getCode = async () => {
     console.error(error);
   }
 };
-
-onMounted(()=>{
-  if (localStorage.getItem('token')) {
-    user.getUser()
+//退出登录请求
+const logout = async () => {
+  await nextTick();
+  const res = await goUserLogout();
+  if (res.data.value.code === 1) {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    ElMessage({
+      message: res.data.value.msg,
+      type: "success",
+    });
   }
-})
+  router.go();
+};
 </script>
 
 <style scoped>

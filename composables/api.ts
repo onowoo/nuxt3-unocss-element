@@ -1,7 +1,7 @@
 import httpRequest from './http'
 
-function getCommon(params: any) {
-  return httpRequest.get({ url: '/addons/cms/api.common/init', params })
+function getCommon() {
+  return httpRequest.get({ url: '/addons/cms/api.common/init' })
 }
 function getCaptcha(params: any) {
   return httpRequest.get({ url: '/addons/cms/api.common/captcha', params })
