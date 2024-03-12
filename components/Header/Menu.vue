@@ -6,10 +6,8 @@ const getMenuList = async() => {
     try {
         await nextTick()
         const res = await getChannel()
-        // console.log(res.data.value.data.channel);
         menu.value = res.data.value.data.channel
-        listTypes.value = res.data.value.data.channel.map(item => item.diyname)
-        // console.log(listTypes.value);
+        listTypes.allowedTypes = res.data.value.data.channel.map(item => item.diyname)
         pending.value = res.pending.value
 
     } catch (error) {

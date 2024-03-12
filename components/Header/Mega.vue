@@ -22,16 +22,18 @@
         <a v-for="(item,index) in currentMega" :key="index" flex="~ justify-center items-center">
             <img :src="baseUrl + item.image" alt="" w-18 h-12 rounded-md>
             <div ml-4 flex="~ col justify-between items-start gap-3" class="basis-3/4" h-12>
+              <NuxtLink :to="`${item.diyname}.html`">
                 <header-flag :name="item.name.replace(/[^\u4e00-\u9fa5|,]+/, '')" :flag="item.flag"/>
-                <div class="text-xs text-ellipsis overflow-hidden cursor-pointer">
-                    <el-tooltip
-                    class="box-item"
-                    effect="dark"
-                    :content="item.description"
-                    placement="top-start"
-                    >{{ item.description }} ...
-                    </el-tooltip>
-                </div>
+              </NuxtLink>
+              <div class="text-xs text-ellipsis overflow-hidden cursor-pointer">
+                  <el-tooltip
+                  class="box-item"
+                  effect="dark"
+                  :content="item.description"
+                  placement="top-start"
+                  >{{ item.description }} ...
+                  </el-tooltip>
+              </div>
             </div>
         </a>
       </div>

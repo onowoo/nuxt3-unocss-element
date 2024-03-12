@@ -24,8 +24,8 @@ function getArchivesVote(params: any) {
 function getArchivesOrder(params: any) {
   return httpRequest.post({ url: '/addons/cms/api.archives/order', data: params })
 }
-function getChannel(params: any) {
-  return httpRequest.get({ url: '/addons/cms/api.archives/get_channel', params })
+function getChannel() {
+  return httpRequest.get({ url: '/addons/cms/api.archives/get_channel' })
 }
 function getChannelFields(params: any) {
   return httpRequest.get({ url: '/addons/cms/api.archives/get_channel_fields', params })

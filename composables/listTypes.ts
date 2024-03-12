@@ -2,5 +2,6 @@ import { defineStore } from 'pinia'
 
 export const useListTypesStore = defineStore('listTypes', () => {
   const allowedTypes = ref([])
-  return { allowedTypes }
+  const menu = ref({})
+  return { allowedTypes,menu }
 })
