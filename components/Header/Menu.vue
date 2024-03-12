@@ -1,14 +1,16 @@
 <script setup>
+const listTypes = useListTypesStore()
 const menu = ref([])
 const pending = ref(true)
 const getMenuList = async() => {
     try {
         await nextTick()
         const res = await getChannel()
-        // console.log(res);
+        // console.log(res.data.value.data.channel);
         menu.value = res.data.value.data.channel
-        
-          pending.value = res.pending.value
+        listTypes.value = res.data.value.data.channel.map(item => item.diyname)
+        // console.log(listTypes.value);
+        pending.value = res.pending.value
 
     } catch (error) {
         console.log(error);

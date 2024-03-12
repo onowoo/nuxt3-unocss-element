@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const route = useRoute<'hi-id'>()
-const user = useUserStore()
 const name = route.params.id
 
 definePageMeta({
@@ -16,8 +15,7 @@ definePageMeta({
       Hi,
     </h3>
     <div text-xl>
-      {{ user.userInfo.username }}!
-      {{ user.userInfo.level }}
+
     </div>
 
 

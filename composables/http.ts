@@ -1,5 +1,5 @@
 import { type UseFetchOptions, navigateTo, useFetch } from 'nuxt/app'
-
+import { baseUrl } from '~/constants/index'
 
 type Methods = 'GET' | 'POST' | 'DELETE' | 'PUT'
 
@@ -40,7 +40,7 @@ const noLoginUrl = [
   '/addons/cms/api.page/detail',
 ]
 
-const BASE_URL = 'http://api.xunun.cn'
+const BASE_URL = baseUrl
 
 export interface IResultData<T> {
   code: number

@@ -1,5 +1,5 @@
 import { appDescription } from './constants/index'
-
+import { NuxtRouteRules } from '@nuxt/schema'
 export default defineNuxtConfig({
   modules: [
     '@element-plus/nuxt',
@@ -26,6 +26,10 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: '',
   },
+  
+  routeRules: {
+    '/**': { middleware: ['allowed-types','auth'] }
+  } as NuxtRouteRules,
 
   nitro: {
     esbuild: {

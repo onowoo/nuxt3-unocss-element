@@ -1,7 +1,9 @@
 <template>
   <div class="group z-50" relative flex="col items-center" focus="outline-none">
     <div class="menu-item gap-1" font-300>
+      <NuxtLink :to="menu.diyname + '.html'">
       {{ menu.name }} <span class="i-carbon-chevron-down" opacity-80 />
+      </NuxtLink>
     </div>
     <div
       class="group-hover:visible"
@@ -18,7 +20,7 @@
     >
       <div grid gap-10 p-8 :class="currentMega.length % 2 === 0 ? 'grid-cols-2':'grid-cols-3'">
         <a v-for="(item,index) in currentMega" :key="index" flex="~ justify-center items-center">
-            <img :src="'http://api.xunun.cn'+ item.image" alt="" w-18 h-12 rounded-md>
+            <img :src="baseUrl + item.image" alt="" w-18 h-12 rounded-md>
             <div ml-4 flex="~ col justify-between items-start gap-3" class="basis-3/4" h-12>
                 <header-flag :name="item.name.replace(/[^\u4e00-\u9fa5|,]+/, '')" :flag="item.flag"/>
                 <div class="text-xs text-ellipsis overflow-hidden cursor-pointer">
@@ -53,6 +55,7 @@
   </div>
 </template>
 <script setup>
+import { baseUrl } from '~/constants/index';
 const props = defineProps({
     menu: {
         type: Object,

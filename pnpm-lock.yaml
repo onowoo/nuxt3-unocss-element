@@ -17,6 +17,9 @@ devDependencies:
   '@iconify-json/twemoji':
     specifier: ^1.1.15
     version: 1.1.15
+  '@nuxt/schema':
+    specifier: ^3.10.3
+    version: 3.10.3(rollup@2.79.1)
   '@nuxtjs/color-mode':
     specifier: ^3.3.2
     version: 3.3.2(rollup@2.79.1)
@@ -1395,8 +1398,8 @@ packages:
       regenerator-runtime: 0.13.11
     dev: true
 
-  /@babel/standalone@7.22.9:
-    resolution: {integrity: sha512-RRUFpN2WiHaczMqIhmy7VoruvSw+c3NSq6BczondQ6elJXtKzr9cAWWsWWZvtZ/rYFQpoQlch5VxQe4aWTt8LA==}
+  /@babel/standalone@7.24.0:
+    resolution: {integrity: sha512-yIZ/X3EAASgX/MW1Bn8iZKxCwixgYJAUaIScoZ9C6Gapw5l3eKIbtVSgO/IGldQed9QXm22yurKVWyWj5/j+SQ==}
     engines: {node: '>=6.9.0'}
     dev: true
 
@@ -2041,7 +2044,7 @@ packages:
       vite: '*'
     dependencies:
       '@nuxt/kit': 3.9.3(rollup@2.79.1)
-      '@nuxt/schema': 3.9.3(rollup@2.79.1)
+      '@nuxt/schema': 3.10.3(rollup@2.79.1)
       execa: 7.2.0
       nuxt: 3.9.3(eslint-ts-patch@8.56.0-0)(rollup@2.79.1)(typescript@5.3.3)(vite@5.0.11)(vue-tsc@1.8.27)
       vite: 5.0.11
@@ -2099,7 +2102,7 @@ packages:
       perfect-debounce: 1.0.0
       pkg-types: 1.0.3
       rc9: 2.1.1
-      scule: 1.2.0
+      scule: 1.3.0
       semver: 7.5.4
       simple-git: 3.22.0
       sirv: 2.0.4
@@ -2133,12 +2136,32 @@ packages:
       mlly: 1.5.0
       pathe: 1.1.2
       pkg-types: 1.0.3
-      scule: 1.2.0
+      scule: 1.3.0
       semver: 7.5.4
-      ufo: 1.3.2
+      ufo: 1.4.0
       unctx: 2.3.1
       unimport: 3.7.1(rollup@2.79.1)
-      untyped: 1.4.0
+      untyped: 1.4.2
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+    dev: true
+
+  /@nuxt/schema@3.10.3(rollup@2.79.1):
+    resolution: {integrity: sha512-a4cYbeskEVBPazgAhvUGkL/j7ho/iPWMK3vCEm6dRMjSqHVEITRosrj0aMfLbRrDpTrMjlRs0ZitxiaUfE/p5Q==}
+    engines: {node: ^14.18.0 || >=16.10.0}
+    dependencies:
+      '@nuxt/ui-templates': 1.3.1
+      consola: 3.2.3
+      defu: 6.1.4
+      hookable: 5.5.3
+      pathe: 1.1.2
+      pkg-types: 1.0.3
+      scule: 1.3.0
+      std-env: 3.7.0
+      ufo: 1.4.0
+      unimport: 3.7.1(rollup@2.79.1)
+      untyped: 1.4.2
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -2154,11 +2177,11 @@ packages:
       hookable: 5.5.3
       pathe: 1.1.2
       pkg-types: 1.0.3
-      scule: 1.2.0
+      scule: 1.3.0
       std-env: 3.7.0
-      ufo: 1.3.2
+      ufo: 1.4.0
       unimport: 3.7.1(rollup@2.79.1)
-      untyped: 1.4.0
+      untyped: 1.4.2
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -2227,7 +2250,7 @@ packages:
       rollup-plugin-visualizer: 5.12.0(rollup@2.79.1)
       std-env: 3.7.0
       strip-literal: 2.0.0
-      ufo: 1.3.2
+      ufo: 1.4.0
       unplugin: 1.6.0
       vite: 5.0.11
       vite-node: 1.2.1
@@ -5816,7 +5839,7 @@ packages:
       enhanced-resolve: 5.15.0
       mlly: 1.5.0
       pathe: 1.1.2
-      ufo: 1.3.2
+      ufo: 1.4.0
     dev: true
 
   /fast-deep-equal@3.1.3:
@@ -6249,7 +6272,7 @@ packages:
       destr: 2.0.2
       iron-webcrypto: 1.0.0
       radix3: 1.1.0
-      ufo: 1.3.2
+      ufo: 1.4.0
       uncrypto: 0.1.3
       unenv: 1.9.0
     dev: true
@@ -6990,7 +7013,7 @@ packages:
       node-forge: 1.3.1
       pathe: 1.1.2
       std-env: 3.7.0
-      ufo: 1.3.2
+      ufo: 1.4.0
       untun: 0.1.2
       uqr: 0.1.2
     dev: true
@@ -7397,7 +7420,7 @@ packages:
       acorn: 8.11.3
       pathe: 1.1.2
       pkg-types: 1.0.3
-      ufo: 1.3.2
+      ufo: 1.4.0
     dev: true
 
   /mri@1.2.0:
@@ -7522,12 +7545,12 @@ packages:
       radix3: 1.1.0
       rollup: 4.9.5
       rollup-plugin-visualizer: 5.12.0(rollup@4.9.5)
-      scule: 1.2.0
+      scule: 1.3.0
       semver: 7.5.4
       serve-placeholder: 2.0.1
       serve-static: 1.15.0
       std-env: 3.7.0
-      ufo: 1.3.2
+      ufo: 1.4.0
       uncrypto: 0.1.3
       unctx: 2.3.1
       unenv: 1.9.0
@@ -7905,7 +7928,7 @@ packages:
       citty: 0.1.5
       execa: 8.0.1
       pathe: 1.1.2
-      ufo: 1.3.2
+      ufo: 1.4.0
     dev: true
 
   /object-assign@4.1.1:
@@ -7937,7 +7960,7 @@ packages:
     dependencies:
       destr: 2.0.2
       node-fetch-native: 1.6.1
-      ufo: 1.3.2
+      ufo: 1.4.0
     dev: true
 
   /ohash@1.1.3:
@@ -8984,6 +9007,10 @@ packages:
     resolution: {integrity: sha512-CRCmi5zHQnSoeCik9565PONMg0kfkvYmcSqrbOJY4txFfy1wvVULV4FDaiXhUblUgahdqz3F2NwHZ8i4eBTwUw==}
     dev: true
 
+  /scule@1.3.0:
+    resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
+    dev: true
+
   /semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
@@ -9698,6 +9725,10 @@ packages:
     resolution: {integrity: sha512-o+ORpgGwaYQXgqGDwd+hkS4PuZ3QnmqMMxRuajK/a38L6fTpcE5GPIfrf+L/KemFzfUpeUQc1rRS1iDBozvnFA==}
     dev: true
 
+  /ufo@1.4.0:
+    resolution: {integrity: sha512-Hhy+BhRBleFjpJ2vchUNN40qgkh0366FWJGqVLYBHev0vpHTrXSA0ryT+74UiW6KWsldNurQMKGqCm1M2zBciQ==}
+    dev: true
+
   /ultrahtml@1.5.2:
     resolution: {integrity: sha512-qh4mBffhlkiXwDAOxvSGxhL0QEQsTbnP9BozOK3OYPEGvPvdWzvAUaXNtUSMdNsKDtuyjEbyVUPFZ52SSLhLqw==}
     dev: true
@@ -9800,7 +9831,7 @@ packages:
       mlly: 1.5.0
       pathe: 1.1.2
       pkg-types: 1.0.3
-      scule: 1.2.0
+      scule: 1.3.0
       strip-literal: 1.3.0
       unplugin: 1.6.0
     transitivePeerDependencies:
@@ -9820,7 +9851,7 @@ packages:
       mlly: 1.5.0
       pathe: 1.1.2
       pkg-types: 1.0.3
-      scule: 1.2.0
+      scule: 1.3.0
       strip-literal: 1.3.0
       unplugin: 1.6.0
     transitivePeerDependencies:
@@ -9917,7 +9948,7 @@ packages:
       local-pkg: 0.4.3
       mlly: 1.5.0
       pathe: 1.1.2
-      scule: 1.2.0
+      scule: 1.3.0
       unplugin: 1.6.0
       vue-router: 4.2.5(vue@3.4.15)
       yaml: 2.3.2
@@ -9986,7 +10017,7 @@ packages:
       mri: 1.2.0
       node-fetch-native: 1.6.1
       ofetch: 1.3.3
-      ufo: 1.3.2
+      ufo: 1.4.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10010,12 +10041,27 @@ packages:
     hasBin: true
     dependencies:
       '@babel/core': 7.23.7
-      '@babel/standalone': 7.22.9
+      '@babel/standalone': 7.24.0
       '@babel/types': 7.23.6
       defu: 6.1.4
       jiti: 1.21.0
       mri: 1.2.0
-      scule: 1.2.0
+      scule: 1.3.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /untyped@1.4.2:
+    resolution: {integrity: sha512-nC5q0DnPEPVURPhfPQLahhSTnemVtPzdx7ofiRxXpOB2SYnb3MfdU3DVGyJdS8Lx+tBWeAePO8BfU/3EgksM7Q==}
+    hasBin: true
+    dependencies:
+      '@babel/core': 7.23.7
+      '@babel/standalone': 7.24.0
+      '@babel/types': 7.23.6
+      defu: 6.1.4
+      jiti: 1.21.0
+      mri: 1.2.0
+      scule: 1.3.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10283,7 +10329,7 @@ packages:
   /vue-bundle-renderer@2.0.0:
     resolution: {integrity: sha512-oYATTQyh8XVkUWe2kaKxhxKVuuzK2Qcehe+yr3bGiaQAhK3ry2kYE4FWOfL+KO3hVFwCdLmzDQTzYhTi9C+R2A==}
     dependencies:
-      ufo: 1.3.2
+      ufo: 1.4.0
     dev: true
 
   /vue-demi@0.14.6(vue@3.4.15):

@@ -80,9 +80,21 @@
         dark="bg-#282828"
       >
         <div>
-          <div>
-            <div>我的设置</div>
-            <div @click="logout">退出登录</div>
+          <div flex="~ gap-2" justify-start items-center border="b" pb-3>
+            <img
+              :src="user.userInfo.avatar"
+              class="rounded-full w-8 h-8"
+              alt=""
+            />
+            <div>
+              {{ user.userInfo.nickname }}
+            </div>
+          </div>
+          <div></div>
+          <div></div>
+          <div flex="~" justify-between items-center text-xs border="t" pt-5>
+            <div cursor="pointer" @click="">我的设置</div>
+            <div cursor="pointer" @click="logout">退出登录</div>
           </div>
         </div>
       </div>
