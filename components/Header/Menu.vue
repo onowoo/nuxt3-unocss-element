@@ -1,24 +1,11 @@
 <script setup>
 const listTypes = useListTypesStore()
-const menu = ref([])
-const pending = ref(true)
-const getMenuList = async() => {
-    try {
-        await nextTick()
-        const res = await getChannel()
-        menu.value = res.data.value.data.channel
-        listTypes.allowedTypes = res.data.value.data.channel.map(item => item.diyname)
-        pending.value = res.pending.value
+const menu = listTypes.menu
+const pending = ref(false)
 
-    } catch (error) {
-        console.log(error);
-    }
-}
-onMounted(()=>[
-getMenuList()
-])
-const channelMenu = computed(() => menu.value.filter(item => item.type === 'channel'))
-const listMenu = computed(() => menu.value.filter(item => item.type === 'list'))
+console.log(menu);
+const channelMenu = computed(() => menu.filter(item => item.type === 'channel'))
+const listMenu = computed(() => menu.filter(item => item.type === 'list'))
 </script>
 
 <template>
