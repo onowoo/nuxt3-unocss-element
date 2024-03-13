@@ -2,8 +2,6 @@
 const listTypes = useListTypesStore()
 const menu = listTypes.menu
 const pending = ref(false)
-
-console.log(menu);
 const channelMenu = computed(() => menu.filter(item => item.type === 'channel'))
 const listMenu = computed(() => menu.filter(item => item.type === 'list'))
 </script>

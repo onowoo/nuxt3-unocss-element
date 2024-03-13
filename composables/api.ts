@@ -172,10 +172,13 @@ function specialIndex(params: any) {
   return httpRequest.get({ url: '/addons/cms/api.special/index', params })
 }
 function getPage(params: any) {
-  return httpRequest.get({ url: '/index.php/api/Page/index', params })
+  return httpRequest.get({ url: '/index.php/api/cms_page/index', params })
 }
 function getPageDetail(params: any) {
   return httpRequest.get({ url: '/addons/cms/api.page/detail', params })
+}
+function getBlock(params: any) {
+  return httpRequest.get({ url: '/index.php/api/cms_block/index', params })
 }
 
 export {
@@ -238,4 +241,5 @@ export {
   specialIndex,
   getPageDetail,
   getPage,
+  getBlock
 }

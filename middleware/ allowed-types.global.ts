@@ -21,9 +21,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
           const params = to.params as RouteParams
           const type = params.type || params.list
           // console.log(to,from);
-          
-          
-          if (type && !allowed.value.includes(type)) {
+          if (type && !allowed.value.includes(type as never)) {
             return navigateTo({ path: '/404' })
           }
         } else {

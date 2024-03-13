@@ -1,5 +1,5 @@
 <template>
-  <div h-16 bg-white shadow dark="bg-#141414">
+  <div h-16 bg-white shadow dark="bg-#181818">
     <div flex="~ justify-between items-center" mx-auto container>
       <el-skeleton :rows="1" animated :loading="loading" variant="text" class="mt-1 scale-y-50">
         <template #default>
